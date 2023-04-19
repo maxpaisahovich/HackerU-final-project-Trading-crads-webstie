@@ -1,0 +1,247 @@
+@local=http://localhost:3900
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDI1YzI1YmQ4YzFlMGE2NDYxZWExZWEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2ODAxOTYzMzQsImV4cCI6MTY4MDE5OTkzNH0.mhSiuPGOGPAaabuk9mgSbfmoKUjyy_tKTB6C6j224Fw
+POST {{local}}/users/
+Content-Type: application/json
+
+{
+  "username": "maxim",
+  "email": "max.paisahovich@gmail.com",
+  "password": "password123",
+  "role": "admin"
+}
+
+### authenticate (login) an existing user
+POST {{local}}/auth
+Content-Type: application/json
+
+{
+    "email": "max.paisahovich@gmail.com",
+    "password": "password123"
+} 
+
+### get logged in user's info
+GET {{local}}/users/profile 
+Authorization: Bearer {{token}}
+
+### update logged user's info
+PUT {{local}}/users/profile
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "username": "max",
+  "email": "mfeldman47@gmail.com",
+  "password": "12345678"
+}
+
+### create new card
+POST {{local}}/cards/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+"cardname": "fgsadsfafeffa",
+"image": "https://i.ebayimg.com/images/g/9PwAAOSwq~tZXRNs/s-l500.png",
+"description": "dbz ggdfsss card",
+"condition": "Near Mint",
+"rarity": "secret rare",
+"category": "Pokemon"
+}
+
+### get my(looged user) cards
+GET {{local}}/cards/my-cards
+Authorization: Bearer {{token}}
+
+### get one card by id card
+GET {{local}}/cards/6425ba4c4b5e413172f53e4e
+Authorization: Bearer {{token}}
+
+### edit card
+PUT {{local}}/cards/6425ba4c4b5e413172f53e4e
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+ {
+"amount": "2"
+ }
+
+### delete card
+DELETE {{local}}/cards/6425ba4c4b5e413172f53e4e
+Authorization: Bearer {{token}}
+
+
+### create a card collection 
+POST {{local}}/card-collection
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+ {
+ "name": "pokemon",
+ "category": "Pokemon"
+ } 
+
+### get my(looged user) collections
+GET {{local}}/card-collection/my-collections
+Authorization: Bearer {{token}}
+
+### get one collection by id card
+GET {{local}}/card-collection/6425bd45e688bb0a73c8525d
+Authorization: Bearer {{token}}
+
+### edit collection
+PUT {{local}}/card-collection/6425bd45e688bb0a73c8525d
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+ {
+"name": "agabubu",
+ "category": "shaltiel"
+ }
+
+### delete collection
+DELETE {{local}}/card-collection/6425bd45e688bb0a73c8525d
+Authorization: Bearer {{token}}
+
+### adding card to a collection
+PUT {{local}}/card-collection/6425bd87e688bb0a73c8526d/add-card
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cardId": "6425ba544b5e413172f53e53"
+}
+
+### remonving card to a collection
+PUT {{local}}/card-collection/6425bd87e688bb0a73c8526d/remove-card
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "cardId": "6425ba544b5e413172f53e53"
+}
+
+### craete a post
+POST {{local}}/posts/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "subject":"hi there",
+  "content": "hay this is a test posts",
+  "type": "Show"
+}
+
+### get all users posts
+GET {{local}}/posts/my-posts/
+Authorization: Bearer {{token}}
+
+### get all posted posts
+GET {{local}}/posts/all
+Authorization: Bearer {{token}}
+
+### get post by id
+GET {{local}}/posts/6425bdcbe688bb0a73c8527a
+Authorization: Bearer {{token}}
+
+### edit posts
+PUT {{local}}/posts/6425bdcbe688bb0a73c8527a
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "subject":"hello world",
+"content": "sdgadfadffasff",
+"type": "Sell"
+}
+
+### delete post
+DELETE {{local}}/posts/6425bdcbe688bb0a73c8527a
+Authorization: Bearer {{token}}
+
+### adding like to a posts
+PUT {{local}}/posts/6425be90293becb004ecb4e4/like
+Authorization: Bearer {{token}}
+
+### adding views to a posts
+PUT {{local}}/posts/6425be90293becb004ecb4e4/view
+Authorization: Bearer {{token}}
+
+### creating report on a posts
+POST {{local}}/reports/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+ "subject":"fake card",
+ "reason": "the card is fake",
+ "post": "6425be90293becb004ecb4e4"
+}
+
+### get all reports 
+GET {{local}}/reports/all
+Authorization: Bearer {{token}}
+
+### get reports for a user 
+GET {{local}}/reports/my-reports
+Authorization: Bearer {{token}}
+
+### delete report
+DELETE {{local}}/reports/6425bf22949d72f9c5632276
+Authorization: Bearer {{token}}
+
+### route for resolved report 
+PUT {{local}}/reports/6425c0fdd8c1e0a6461ea1c6/resolve
+Authorization: Bearer {{token}}
+
+### craete a comment
+POST {{local}}/comments/post/6425be90293becb004ecb4e4
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "cool card"
+}
+
+### get comments 
+GET {{local}}/comments/post/6425be90293becb004ecb4e4
+Authorization: Bearer {{token}}
+
+### update comment by id
+PUT {{local}}/comments/6425c1fcd8c1e0a6461ea1d5
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "text": "adsdasdas"
+}
+
+### delete a comment by id
+DELETE {{local}}/comments/6425c1fcd8c1e0a6461ea1d5
+Authorization: Bearer {{token}}
+
+### add like to a comment 
+PUT {{local}}/comments/6425c22dd8c1e0a6461ea1e2/like
+Authorization: Bearer {{token}}
+
+### create a private message
+POST {{local}}/private-messages/
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "subject": "hello",
+  "text": "how are you",
+  "receiver": "6425c25bd8c1e0a6461ea1ea"
+}
+
+### get all messages between two users
+GET {{local}}/private-messages/6425b8ef4b5e413172f53e45/6425c25bd8c1e0a6461ea1ea
+Authorization: Bearer {{token}}
+
+### delete private-message
+DELETE {{local}}/private-messages/6425c285d8c1e0a6461ea1ed
+Authorization: Bearer {{token}}
+
+### mark message as read
+PUT {{local}}/private-messages/6425c2c6d8c1e0a6461ea1fa/read
+Authorization: Bearer {{token}}
